@@ -1,4 +1,4 @@
- 
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -49,14 +49,18 @@
       color: #ff1493;
       margin-bottom: 20px;
     }
+
+    /* ✅ Enlarged Message */
     .message {
-      max-width: 500px;
-      font-size: 20px;
+      max-width: 800px;
+      font-size: 26px;
+      line-height: 1.6;
       background: white;
-      padding: 20px;
+      padding: 30px;
       border-radius: 15px;
       box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
     }
+
     .heart-box {
       font-size: 100px;
       cursor: pointer;
@@ -80,18 +84,22 @@
       0% { transform: scale(1); opacity: 1; }
       100% { transform: scale(25); opacity: 0; }
     }
+
+    /* ✅ Bigger Images */
     .slideshow-section img {
-      width: 80vw;
-      max-width: 400px;
+      width: 90vw;
+      max-width: 600px;
       border-radius: 15px;
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
       display: none;
       animation: fadeIn 1s ease forwards;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
     .music-disc {
       position: fixed;
       top: 20px;
@@ -142,6 +150,25 @@
     }
     @keyframes blink {
       50% { opacity: 0; }
+    }
+
+    /* ✅ Responsive Design */
+    @media (max-width: 600px) {
+      .cake { font-size: 36px; }
+      .name { font-size: 24px; }
+      .click-box { font-size: 20px; padding: 16px 32px; }
+      .message {
+        font-size: 20px;
+        padding: 20px;
+        max-width: 95%;
+      }
+      .heart-box {
+        font-size: 80px;
+      }
+      .slideshow-section img {
+        width: 95vw;
+        max-width: 100%;
+      }
     }
   </style>
 </head>
@@ -195,12 +222,17 @@
       setTimeout(() => {
         document.getElementById('gift').style.display = 'flex';
       }, 4000);
-      document.getElementById('romanticAudio').play();
+      // ❌ Removed auto-play here
     }
 
     function openGift() {
       document.getElementById('gift').style.display = 'none';
       explodeFireworks();
+      // ✅ Auto-play music when gift opens
+      const audio = document.getElementById('romanticAudio');
+      audio.play().catch(e => {
+        console.log("User interaction required for autoplay.");
+      });
       setTimeout(() => {
         startSlideshow();
       }, 2500);
