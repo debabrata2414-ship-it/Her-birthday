@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Birthday Tuuaa Raniii ❤️❤️😘</title>
+
+  <!-- ✅ Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
@@ -71,6 +75,7 @@
       50% { transform: scale(1.1); }
       100% { transform: scale(1); }
     }
+
     .firework {
       position: fixed;
       width: 10px;
@@ -111,11 +116,26 @@
       border: 3px solid #ff69b4;
       animation: spin 5s linear infinite;
       box-shadow: 0 0 20px rgba(255, 192, 203, 0.7);
+      z-index: 10;
     }
+
+    /* ✅ Zoom Out Label Beside Disc */
+    .zoom-label {
+      position: fixed;
+      top: 30px;
+      left: 110px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 28px;
+      color: #ff1493;
+      font-weight: bold;
+      z-index: 10;
+    }
+
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
+
     .stars, .hearts {
       position: fixed;
       top: 0;
@@ -125,10 +145,12 @@
       pointer-events: none;
       z-index: -1;
     }
+
     .stars {
       background-image: radial-gradient(#ffffff33 1px, transparent 1px);
       background-size: 30px 30px;
     }
+
     .hearts::before {
       content: '💖💞💕💓💘';
       font-size: 30px;
@@ -138,16 +160,19 @@
       transform: translate(-50%, -50%);
       animation: floatHearts 10s linear infinite;
     }
+
     @keyframes floatHearts {
       0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
       100% { transform: translate(-50%, -200%) scale(2); opacity: 0; }
     }
+
     .scroll-msg {
       font-size: 16px;
       color: #ff1493;
       margin-top: 10px;
       animation: blink 1s step-start infinite;
     }
+
     @keyframes blink {
       50% { opacity: 0; }
     }
@@ -169,13 +194,21 @@
         width: 95vw;
         max-width: 100%;
       }
+      .zoom-label {
+        font-size: 20px;
+        left: 110px;
+        top: 35px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="stars"></div>
   <div class="hearts"></div>
+
   <div class="music-disc"></div>
+  <div class="zoom-label">Zoom Out</div> <!-- ✅ Added Label -->
+
   <div class="container">
     <div class="click-box" onclick="startSurprise()">Click Me 💝</div>
 
@@ -214,26 +247,41 @@
 
   <script>
     function startSurprise() {
+      // Hide click button
       document.querySelector('.click-box').style.display = 'none';
+
+      // Play music immediately on click
+      const audio = document.getElementById('romanticAudio');
+      audio.play().catch(e => {
+        console.log("User interaction needed to play audio.");
+      });
+
+      // Show cake and wish in sequence
       document.getElementById('cake').style.display = 'flex';
       setTimeout(() => {
         document.getElementById('wish').style.display = 'flex';
       }, 2000);
+
+      // Show gift heart after 4 seconds
       setTimeout(() => {
         document.getElementById('gift').style.display = 'flex';
       }, 4000);
-      // ❌ Removed auto-play here
     }
 
     function openGift() {
-      document.getElementById('gift').style.display = 'none';
+      // Hide the heart icon so user can't click again
+      document.querySelector('.heart-box').style.display = 'none';
+
+      // Change the gift message text
+      const giftMessage = document.querySelector('#gift .message');
+      giftMessage.textContent = "Here's your surprise! 🎉 Enjoy the music and photos!";
+
+      // Start fireworks
       explodeFireworks();
-      // ✅ Auto-play music when gift opens
-      const audio = document.getElementById('romanticAudio');
-      audio.play().catch(e => {
-        console.log("User interaction required for autoplay.");
-      });
+
+      // After 2.5 seconds, hide gift section and start slideshow
       setTimeout(() => {
+        document.getElementById('gift').style.display = 'none';
         startSlideshow();
       }, 2500);
     }
