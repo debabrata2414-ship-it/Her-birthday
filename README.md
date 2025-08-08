@@ -1,7 +1,8 @@
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Happy Birthday Tuuaa Raniii ❤️❤️😘</title>
 
   <!-- ✅ Google Font -->
@@ -147,7 +148,6 @@
       50% { opacity: 0; }
     }
 
-    /* ❤️ Love Shower */
     .love-shower {
       position: fixed;
       top: 0;
@@ -169,75 +169,80 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh);
-        opacity: 0.3;
-      }
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0.3; }
     }
 
-    /* ✅ Improved Mobile Responsiveness */
-    @media (max-width: 600px) {
-      .cake {
-        font-size: 30px;
-        text-align: center;
-      }
-
-      .name {
-        font-size: 22px;
-        margin-bottom: 15px;
+    /* ✅ Portrait Mode Fixes */
+    @media screen and (max-width: 600px) and (orientation: portrait) {
+      .container {
+        padding: 15px 10px;
       }
 
       .click-box {
-        font-size: 18px;
-        padding: 14px 24px;
-        width: 100%;
-        max-width: 320px;
-        margin: 80px auto 0;
+        font-size: 16px;
+        padding: 14px 20px;
+        margin-top: 60px;
+      }
+
+      .cake {
+        font-size: 28px;
+      }
+
+      .name {
+        font-size: 20px;
       }
 
       .message {
         font-size: 18px;
         padding: 16px;
-        line-height: 1.5;
-        box-shadow: none;
         width: 95%;
       }
 
       .heart-box {
-        font-size: 70px;
+        font-size: 60px;
       }
 
       .scroll-msg {
-        font-size: 14px;
-      }
-
-      .slideshow-section img {
-        width: 95vw;
-        max-width: 100%;
-        height: auto;
+        font-size: 12px;
       }
 
       .music-disc {
         width: 50px;
         height: 50px;
-        bottom: 15px;
-        right: 15px;
+        bottom: 10px;
+        right: 10px;
       }
 
-      .firework {
-        box-shadow: 0 0 10px #fff5fa, 0 0 15px #ff69b4;
+      .slideshow-section img {
+        max-width: 100%;
+        width: 95vw;
+        height: auto;
+      }
+    }
+
+    /* 🚫 Optional: Warn if landscape mode */
+    @media screen and (orientation: landscape) and (max-width: 767px) {
+      body::before {
+        content: "Please rotate your phone to portrait mode 📱";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-size: 24px;
+        background: #fff0f5;
+        color: #ff1493;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+        text-align: center;
+        padding: 20px;
       }
 
-      .container {
-        padding: 20px 10px;
-      }
-
-      .love-shower .heart {
-        font-size: 12px !important;
+      .container, .music-disc {
+        display: none !important;
       }
     }
   </style>
@@ -329,7 +334,6 @@
       slideshow.style.display = 'flex';
       let i = 0;
 
-      // ❤️ Start love shower
       document.getElementById('loveShower').style.display = 'block';
       generateLoveShower();
 
@@ -342,7 +346,6 @@
       showNext();
     }
 
-    // ❤️ Love Shower Generator
     function generateLoveShower() {
       setInterval(() => {
         const heart = document.createElement('div');
