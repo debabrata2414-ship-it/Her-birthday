@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -28,19 +27,20 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 30px;
+      padding: 5vw;
     }
 
     .click-box {
       background-color: #ff69b4;
       color: white;
-      padding: 20px 40px;
-      font-size: 24px;
+      padding: 4vw 8vw;
+      font-size: clamp(18px, 5vw, 24px);
       border-radius: 10px;
       cursor: pointer;
       transition: all 0.3s ease;
-      margin-top: 100px;
+      margin-top: 15vh;
       max-width: 90%;
+      word-wrap: break-word;
     }
 
     .click-box:hover {
@@ -52,15 +52,17 @@
       flex-direction: column;
       align-items: center;
       animation: fadeIn 2s ease forwards;
+      width: 100%;
     }
 
     .cake {
-      font-size: 50px;
+      font-size: clamp(28px, 6vw, 50px);
       margin: 40px 0 10px;
+      word-wrap: break-word;
     }
 
     .name {
-      font-size: 30px;
+      font-size: clamp(20px, 5vw, 30px);
       font-weight: bold;
       color: #ff1493;
       margin-bottom: 20px;
@@ -68,17 +70,17 @@
 
     .message {
       max-width: 800px;
-      font-size: 26px;
+      font-size: clamp(16px, 4vw, 26px);
       line-height: 1.6;
       background: white;
-      padding: 30px;
+      padding: 4vw;
       border-radius: 15px;
       box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
       width: 100%;
     }
 
     .heart-box {
-      font-size: 100px;
+      font-size: clamp(50px, 15vw, 100px);
       cursor: pointer;
       animation: pulse 1.5s infinite;
     }
@@ -111,6 +113,7 @@
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
       display: none;
       animation: fadeIn 1s ease forwards;
+      object-fit: cover;
     }
 
     @keyframes fadeIn {
@@ -122,8 +125,8 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 70px;
-      height: 70px;
+      width: clamp(50px, 15vw, 70px);
+      height: clamp(50px, 15vw, 70px);
       border-radius: 50%;
       background: url('img3.jpg') no-repeat center/cover;
       border: 3px solid #ff69b4;
@@ -138,7 +141,7 @@
     }
 
     .scroll-msg {
-      font-size: 16px;
+      font-size: clamp(12px, 3vw, 16px);
       color: #ff1493;
       margin-top: 10px;
       animation: blink 1s step-start infinite;
@@ -170,25 +173,8 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh);
-        opacity: 0.3;
-      }
-    }
-
-    /* ✅ Responsive Fixes */
-    @media (max-width: 600px) {
-      .cake { font-size: 36px; }
-      .name { font-size: 24px; }
-      .click-box { font-size: 20px; padding: 16px 32px; }
-      .message { font-size: 20px; padding: 20px; }
-      .heart-box { font-size: 80px; }
-      .slideshow-section img { width: 95vw; max-width: 100%; }
-      .music-disc { width: 60px; height: 60px; }
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0.3; }
     }
   </style>
 </head>
@@ -279,7 +265,6 @@
       slideshow.style.display = 'flex';
       let i = 0;
 
-      // ❤️ Start love shower
       document.getElementById('loveShower').style.display = 'block';
       generateLoveShower();
 
@@ -292,7 +277,6 @@
       showNext();
     }
 
-    // ❤️ Love Shower Generator
     function generateLoveShower() {
       setInterval(() => {
         const heart = document.createElement('div');
@@ -308,5 +292,4 @@
   </script>
 </body>
 </html>
-
 
