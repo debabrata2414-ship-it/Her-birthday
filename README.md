@@ -1,3 +1,4 @@
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,15 +9,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    /* Reset */
+    body, html {
       margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to bottom right, #ffd6e8, #fff0f5);
-      overflow-x: hidden;
       position: relative;
     }
 
+    /* Canvas full screen behind */
+    #loveCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: screen; /* softly blend hearts with background */
+    }
+
+    /* Container on top */
     .container {
+      position: relative;
+      z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -34,10 +53,14 @@
       cursor: pointer;
       transition: all 0.3s ease;
       margin-top: 100px;
+      z-index: 10;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(255,20,147,0.6);
     }
 
     .click-box:hover {
       background-color: #ff1493;
+      box-shadow: 0 6px 18px rgba(255,20,147,0.9);
     }
 
     .cake-section, .message-section, .gift-section, .gallery-section, .slideshow-section {
@@ -45,11 +68,15 @@
       flex-direction: column;
       align-items: center;
       animation: fadeIn 2s ease forwards;
+      z-index: 10;
+      position: relative;
     }
 
     .cake {
       font-size: 50px;
       margin: 40px 0 10px;
+      text-shadow: 0 0 12px #ff69b4;
+      color: #d81b60;
     }
 
     .name {
@@ -57,27 +84,33 @@
       font-weight: bold;
       color: #ff1493;
       margin-bottom: 20px;
+      text-shadow: 0 0 8px #ff1493;
     }
 
     .message {
       max-width: 800px;
       font-size: 26px;
       line-height: 1.6;
-      background: white;
+      background: rgba(255, 255, 255, 0.85);
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+      color: #900048;
     }
 
     .heart-box {
       font-size: 100px;
       cursor: pointer;
       animation: pulse 1.5s infinite;
+      color: #ff007f;
+      text-shadow: 0 0 15px #ff007f;
+      z-index: 10;
+      position: relative;
     }
 
     @keyframes pulse {
       0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
+      50% { transform: scale(1.15); }
       100% { transform: scale(1); }
     }
 
@@ -103,6 +136,8 @@
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
       display: none;
       animation: fadeIn 1s ease forwards;
+      position: relative;
+      z-index: 10;
     }
 
     @keyframes fadeIn {
@@ -124,10 +159,10 @@
       z-index: 10;
     }
 
-    /* ✅ Updated Zoom Out Label */
+    /* Zoom Out Label with Arrow */
     .zoom-label {
       position: fixed;
-      top: 110px; /* Below the disc (80px + 20px margin) */
+      top: 110px;
       left: 20px;
       font-family: 'Dancing Script', cursive;
       font-size: 36px;
@@ -137,11 +172,29 @@
       z-index: 10;
     }
 
+    .arrow {
+      display: inline-block;
+      margin-left: 12px;
+      font-size: 42px;
+      color: #ff1493;
+      font-weight: bold;
+      animation: arrowFloat 2s ease-in-out infinite;
+      transform: translateY(4px);
+      text-shadow: 0 0 8px rgba(255, 105, 180, 0.5);
+    }
+
+    @keyframes arrowFloat {
+      0% { transform: translateX(0) translateY(4px); opacity: 1; }
+      50% { transform: translateX(8px) translateY(4px); opacity: 0.7; }
+      100% { transform: translateX(0) translateY(4px); opacity: 1; }
+    }
+
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
 
+    /* Star and Heart backgrounds - keep behind */
     .stars, .hearts {
       position: fixed;
       top: 0;
@@ -177,13 +230,15 @@
       color: #ff1493;
       margin-top: 10px;
       animation: blink 1s step-start infinite;
+      z-index: 10;
+      position: relative;
     }
 
     @keyframes blink {
       50% { opacity: 0; }
     }
 
-    /* ✅ Responsive Design */
+    /* Responsive */
     @media (max-width: 600px) {
       .cake { font-size: 36px; }
       .name { font-size: 24px; }
@@ -200,21 +255,26 @@
         width: 95vw;
         max-width: 100%;
       }
-      /* ✅ Updated Zoom Out Label for Mobile */
       .zoom-label {
         font-size: 28px;
         top: 110px;
         left: 20px;
       }
+      .arrow {
+        font-size: 34px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Romantic hearts blooming canvas -->
+  <canvas id="loveCanvas"></canvas>
+
   <div class="stars"></div>
   <div class="hearts"></div>
 
   <div class="music-disc"></div>
-  <div class="zoom-label">Zoom Out</div> <!-- ✅ Moved Below and Enlarged -->
+  <div class="zoom-label">Zoom Out <span class="arrow">➠</span></div>
 
   <div class="container">
     <div class="click-box" onclick="startSurprise()">Click Me 💝</div>
@@ -253,6 +313,91 @@
   </audio>
 
   <script>
+    // Canvas love hearts animation
+    const canvas = document.getElementById('loveCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let hearts = [];
+
+    const loveSymbols = ['❤️', '💖', '💕', '💘', '💞', '💓', '😘', '❣️'];
+
+    function random(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function Heart() {
+      this.x = random(0, width);
+      this.y = random(height, height + 100);
+      this.size = random(14, 30);
+      this.speed = random(0.5, 1.5);
+      this.opacity = 0;
+      this.opacitySpeed = 0.01 + Math.random() * 0.02;
+      this.symbol = loveSymbols[Math.floor(random(0, loveSymbols.length))];
+      this.bloomScale = 1;
+      this.bloomDirection = 1; // 1 growing, -1 shrinking
+    }
+
+    Heart.prototype.update = function() {
+      this.y -= this.speed;
+      if(this.opacity < 1) {
+        this.opacity += this.opacitySpeed;
+      }
+      // Blooming effect
+      this.bloomScale += this.bloomDirection * 0.005;
+      if(this.bloomScale >= 1.15) this.bloomDirection = -1;
+      else if(this.bloomScale <= 1) this.bloomDirection = 1;
+
+      if(this.y < -50) {
+        this.x = random(0, width);
+        this.y = height + random(20, 100);
+        this.size = random(14, 30);
+        this.speed = random(0.5, 1.5);
+        this.opacity = 0;
+        this.symbol = loveSymbols[Math.floor(random(0, loveSymbols.length))];
+      }
+    }
+
+    Heart.prototype.draw = function() {
+      ctx.save();
+      ctx.globalAlpha = this.opacity;
+      ctx.font = `${this.size * this.bloomScale}px 'Segoe UI Emoji', 'Segoe UI', sans-serif`;
+      ctx.fillStyle = `rgba(255, 20, 147, ${this.opacity})`;
+      ctx.textAlign = 'center';
+      ctx.shadowColor = `rgba(255, 105, 180, ${this.opacity})`;
+      ctx.shadowBlur = 8;
+      ctx.fillText(this.symbol, this.x, this.y);
+      ctx.restore();
+    }
+
+    function init() {
+      resize();
+      hearts = [];
+      for(let i=0; i < 40; i++) {
+        hearts.push(new Heart());
+      }
+      animate();
+    }
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      hearts.forEach(h => {
+        h.update();
+        h.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', resize);
+    init();
+
+    // Your existing functions
     function startSurprise() {
       document.querySelector('.click-box').style.display = 'none';
       const audio = document.getElementById('romanticAudio');
@@ -306,4 +451,3 @@
   </script>
 </body>
 </html>
-
