@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -16,6 +15,7 @@
       overflow-x: hidden;
       position: relative;
     }
+
     .container {
       display: flex;
       flex-direction: column;
@@ -24,6 +24,7 @@
       text-align: center;
       padding: 30px;
     }
+
     .click-box {
       background-color: #ff69b4;
       color: white;
@@ -34,19 +35,23 @@
       transition: all 0.3s ease;
       margin-top: 100px;
     }
+
     .click-box:hover {
       background-color: #ff1493;
     }
+
     .cake-section, .message-section, .gift-section, .gallery-section, .slideshow-section {
       display: none;
       flex-direction: column;
       align-items: center;
       animation: fadeIn 2s ease forwards;
     }
+
     .cake {
       font-size: 50px;
       margin: 40px 0 10px;
     }
+
     .name {
       font-size: 30px;
       font-weight: bold;
@@ -54,7 +59,6 @@
       margin-bottom: 20px;
     }
 
-    /* ✅ Enlarged Message */
     .message {
       max-width: 800px;
       font-size: 26px;
@@ -70,6 +74,7 @@
       cursor: pointer;
       animation: pulse 1.5s infinite;
     }
+
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.1); }
@@ -85,12 +90,12 @@
       animation: explode 1.2s ease-out forwards;
       box-shadow: 0 0 20px #fff5fa, 0 0 30px #ff69b4;
     }
+
     @keyframes explode {
       0% { transform: scale(1); opacity: 1; }
       100% { transform: scale(25); opacity: 0; }
     }
 
-    /* ✅ Bigger Images */
     .slideshow-section img {
       width: 90vw;
       max-width: 600px;
@@ -119,15 +124,16 @@
       z-index: 10;
     }
 
-    /* ✅ Zoom Out Label Beside Disc */
+    /* ✅ Updated Zoom Out Label */
     .zoom-label {
       position: fixed;
-      top: 30px;
-      left: 110px;
+      top: 110px; /* Below the disc (80px + 20px margin) */
+      left: 20px;
       font-family: 'Dancing Script', cursive;
-      font-size: 28px;
+      font-size: 36px;
       color: #ff1493;
       font-weight: bold;
+      text-shadow: 1px 1px 4px #fff;
       z-index: 10;
     }
 
@@ -194,10 +200,11 @@
         width: 95vw;
         max-width: 100%;
       }
+      /* ✅ Updated Zoom Out Label for Mobile */
       .zoom-label {
-        font-size: 20px;
-        left: 110px;
-        top: 35px;
+        font-size: 28px;
+        top: 110px;
+        left: 20px;
       }
     }
   </style>
@@ -207,7 +214,7 @@
   <div class="hearts"></div>
 
   <div class="music-disc"></div>
-  <div class="zoom-label">Zoom Out</div> <!-- ✅ Added Label -->
+  <div class="zoom-label">Zoom Out</div> <!-- ✅ Moved Below and Enlarged -->
 
   <div class="container">
     <div class="click-box" onclick="startSurprise()">Click Me 💝</div>
@@ -247,39 +254,25 @@
 
   <script>
     function startSurprise() {
-      // Hide click button
       document.querySelector('.click-box').style.display = 'none';
-
-      // Play music immediately on click
       const audio = document.getElementById('romanticAudio');
       audio.play().catch(e => {
         console.log("User interaction needed to play audio.");
       });
-
-      // Show cake and wish in sequence
       document.getElementById('cake').style.display = 'flex';
       setTimeout(() => {
         document.getElementById('wish').style.display = 'flex';
       }, 2000);
-
-      // Show gift heart after 4 seconds
       setTimeout(() => {
         document.getElementById('gift').style.display = 'flex';
       }, 4000);
     }
 
     function openGift() {
-      // Hide the heart icon so user can't click again
       document.querySelector('.heart-box').style.display = 'none';
-
-      // Change the gift message text
       const giftMessage = document.querySelector('#gift .message');
       giftMessage.textContent = "Here's your surprise! 🎉 Enjoy the music and photos!";
-
-      // Start fireworks
       explodeFireworks();
-
-      // After 2.5 seconds, hide gift section and start slideshow
       setTimeout(() => {
         document.getElementById('gift').style.display = 'none';
         startSlideshow();
@@ -313,3 +306,4 @@
   </script>
 </body>
 </html>
+
