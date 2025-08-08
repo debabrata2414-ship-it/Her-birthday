@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Happy Birthday Tuuaa Raniii ❤️❤️😘</title>
 
-  <!-- ✅ Google Font -->
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 
   <style>
@@ -16,6 +16,7 @@
       overflow-x: hidden;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to bottom right, #ffd6e8, #fff0f5);
+      height: 100%;
     }
 
     * {
@@ -29,6 +30,7 @@
       justify-content: center;
       text-align: center;
       padding: 30px;
+      min-height: 100vh;
     }
 
     .click-box {
@@ -41,17 +43,21 @@
       transition: all 0.3s ease;
       margin-top: 100px;
       max-width: 90%;
+      user-select: none;
     }
 
     .click-box:hover {
       background-color: #ff1493;
     }
 
-    .cake-section, .message-section, .gift-section, .gallery-section, .slideshow-section {
+    .cake-section, .message-section, .gift-section, .slideshow-section {
       display: none;
       flex-direction: column;
       align-items: center;
       animation: fadeIn 2s ease forwards;
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto;
     }
 
     .cake {
@@ -64,10 +70,10 @@
       font-weight: bold;
       color: #ff1493;
       margin-bottom: 20px;
+      font-family: 'Dancing Script', cursive;
     }
 
     .message {
-      max-width: 800px;
       font-size: 26px;
       line-height: 1.6;
       background: white;
@@ -75,12 +81,17 @@
       border-radius: 15px;
       box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
       width: 100%;
+      user-select: none;
     }
 
     .heart-box {
       font-size: 100px;
       cursor: pointer;
       animation: pulse 1.5s infinite;
+      user-select: none;
+      color: #ff0000;
+      text-shadow: 0 0 15px #ff0000, 0 0 30px #ff4d4d;
+      margin-bottom: 10px;
     }
 
     @keyframes pulse {
@@ -97,6 +108,8 @@
       border-radius: 50%;
       animation: explode 1.2s ease-out forwards;
       box-shadow: 0 0 20px #fff5fa, 0 0 30px #ff69b4;
+      pointer-events: none;
+      user-select: none;
     }
 
     @keyframes explode {
@@ -111,6 +124,7 @@
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
       display: none;
       animation: fadeIn 1s ease forwards;
+      user-select: none;
     }
 
     @keyframes fadeIn {
@@ -130,6 +144,7 @@
       animation: spin 5s linear infinite;
       box-shadow: 0 0 20px rgba(255, 192, 203, 0.7);
       z-index: 10;
+      user-select: none;
     }
 
     @keyframes spin {
@@ -142,12 +157,14 @@
       color: #ff1493;
       margin-top: 10px;
       animation: blink 1s step-start infinite;
+      user-select: none;
     }
 
     @keyframes blink {
       50% { opacity: 0; }
     }
 
+    /* ❤️ Love Shower */
     .love-shower {
       position: fixed;
       top: 0;
@@ -158,92 +175,45 @@
       overflow: hidden;
       z-index: 5;
       display: none;
+      user-select: none;
     }
 
     .heart {
       position: absolute;
       top: -20px;
+      color: red;
+      text-shadow: 0 0 10px #ff0000, 0 0 20px #ff4d4d, 0 0 30px #ff6666;
       animation-name: fall;
       animation-timing-function: linear;
-      color: #ff69b4;
+      user-select: none;
     }
 
     @keyframes fall {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(100vh); opacity: 0.3; }
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0.2;
+      }
     }
 
-    /* ✅ Portrait Mode Fixes */
-    @media screen and (max-width: 600px) and (orientation: portrait) {
+    /* Responsive Fixes */
+    @media (max-width: 600px) {
       .container {
-        padding: 15px 10px;
-      }
-
-      .click-box {
-        font-size: 16px;
-        padding: 14px 20px;
-        margin-top: 60px;
-      }
-
-      .cake {
-        font-size: 28px;
-      }
-
-      .name {
-        font-size: 20px;
-      }
-
-      .message {
-        font-size: 18px;
-        padding: 16px;
-        width: 95%;
-      }
-
-      .heart-box {
-        font-size: 60px;
-      }
-
-      .scroll-msg {
-        font-size: 12px;
-      }
-
-      .music-disc {
-        width: 50px;
-        height: 50px;
-        bottom: 10px;
-        right: 10px;
-      }
-
-      .slideshow-section img {
-        max-width: 100%;
-        width: 95vw;
-        height: auto;
-      }
-    }
-
-    /* 🚫 Optional: Warn if landscape mode */
-    @media screen and (orientation: landscape) and (max-width: 767px) {
-      body::before {
-        content: "Please rotate your phone to portrait mode 📱";
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        font-size: 24px;
-        background: #fff0f5;
-        color: #ff1493;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 9999;
-        text-align: center;
         padding: 20px;
+        align-items: center;
+        justify-content: center;
       }
 
-      .container, .music-disc {
-        display: none !important;
-      }
+      .cake { font-size: 36px; }
+      .name { font-size: 24px; }
+      .click-box { font-size: 20px; padding: 16px 32px; }
+      .message { font-size: 20px; padding: 20px; }
+      .heart-box { font-size: 80px; }
+      .slideshow-section img { width: 95vw; max-width: 100%; }
+      .music-disc { width: 60px; height: 60px; }
     }
   </style>
 </head>
@@ -270,25 +240,25 @@
     </div>
 
     <div class="slideshow-section" id="slideshow">
-      <img src="img1.jpg" />
-      <img src="img2.jpg" />
-      <img src="img4.jpg" />
-      <img src="img5.jpg" />
-      <img src="img6.jpg" />
-      <img src="img7.jpg" />
-      <img src="img9.jpg" />
-      <img src="img10.jpg" />
+      <img src="img1.jpg" alt="Birthday photo 1" />
+      <img src="img2.jpg" alt="Birthday photo 2" />
+      <img src="img4.jpg" alt="Birthday photo 4" />
+      <img src="img5.jpg" alt="Birthday photo 5" />
+      <img src="img6.jpg" alt="Birthday photo 6" />
+      <img src="img7.jpg" alt="Birthday photo 7" />
+      <img src="img9.jpg" alt="Birthday photo 9" />
+      <img src="img10.jpg" alt="Birthday photo 10" />
     </div>
   </div>
 
-  <!-- 🎵 Music Disc -->
-  <div class="music-disc"></div>
+  <!-- Music Disc -->
+  <div class="music-disc" aria-label="Rotating music disc"></div>
 
-  <!-- ❤️ Love Shower Container -->
-  <div class="love-shower" id="loveShower"></div>
+  <!-- Love Shower Container -->
+  <div class="love-shower" id="loveShower" aria-hidden="true"></div>
 
-  <!-- 🎶 Background Music -->
-  <audio id="romanticAudio">
+  <!-- Background Music -->
+  <audio id="romanticAudio" preload="auto">
     <source src="romantic.mp3" type="audio/mpeg" />
   </audio>
 
@@ -296,7 +266,7 @@
     function startSurprise() {
       document.querySelector('.click-box').style.display = 'none';
       const audio = document.getElementById('romanticAudio');
-      audio.play().catch(e => console.log("User interaction needed to play audio."));
+      audio.play().catch(() => console.log("User interaction needed to play audio."));
       document.getElementById('cake').style.display = 'flex';
       setTimeout(() => {
         document.getElementById('wish').style.display = 'flex';
@@ -334,6 +304,11 @@
       slideshow.style.display = 'flex';
       let i = 0;
 
+      // Show the first image immediately
+      images.forEach(img => img.style.display = 'none');
+      images[0].style.display = 'block';
+
+      // Start love shower hearts
       document.getElementById('loveShower').style.display = 'block';
       generateLoveShower();
 
@@ -343,20 +318,23 @@
         i = (i + 1) % images.length;
         setTimeout(showNext, 2500);
       }
-      showNext();
+      setTimeout(showNext, 2500);
     }
 
+    // Love Shower Generator with red glowing hearts, centered horizontally
     function generateLoveShower() {
       setInterval(() => {
         const heart = document.createElement('div');
         heart.className = 'heart';
-        heart.textContent = '💖';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.fontSize = (10 + Math.random() * 20) + 'px';
+        heart.textContent = '❤️';
+        // Centered horizontally between 25vw to 75vw (middle half)
+        heart.style.left = (25 + Math.random() * 50) + 'vw';
+        heart.style.fontSize = (15 + Math.random() * 25) + 'px';
         heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+        heart.style.opacity = 1;
         document.getElementById('loveShower').appendChild(heart);
         setTimeout(() => heart.remove(), 7000);
-      }, 100);
+      }, 120);
     }
   </script>
 </body>
