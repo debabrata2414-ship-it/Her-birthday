@@ -1,10 +1,11 @@
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Birthday Tuuaa Raniii ❤️❤️😘</title>
 
-  <!-- ✅ Google Font -->
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 
   <style>
@@ -40,7 +41,7 @@
       background-color: #ff1493;
     }
 
-    .cake-section, .message-section, .gift-section, .gallery-section, .slideshow-section {
+    .cake-section, .message-section, .gift-section, .slideshow-section {
       display: none;
       flex-direction: column;
       align-items: center;
@@ -89,22 +90,11 @@
       border-radius: 50%;
       animation: explode 1.2s ease-out forwards;
       box-shadow: 0 0 20px #fff5fa, 0 0 30px #ff69b4;
-      pointer-events: none;
-      z-index: 1000;
     }
 
     @keyframes explode {
       0% { transform: scale(1); opacity: 1; }
       100% { transform: scale(25); opacity: 0; }
-    }
-
-    .slideshow-section {
-      position: relative;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 5;
     }
 
     .slideshow-section img {
@@ -114,8 +104,6 @@
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
       display: none;
       animation: fadeIn 1s ease forwards;
-      z-index: 6;
-      position: relative;
     }
 
     @keyframes fadeIn {
@@ -123,7 +111,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Moved music disc to bottom right */
+    /* ✅ Music Disc - Bottom Right */
     .music-disc {
       position: fixed;
       bottom: 20px;
@@ -143,99 +131,102 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Hearts shower container, hidden by default */
-    .love-shower {
-      pointer-events: none;
+    .stars, .hearts {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: visible;
-      z-index: 2;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
     }
 
-    .love-shower .heart {
+    .stars {
+      background-image: radial-gradient(#ffffff33 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    .hearts::before {
+      content: '💖💞💕💓💘';
+      font-size: 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: floatHearts 10s linear infinite;
+    }
+
+    @keyframes floatHearts {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      100% { transform: translate(-50%, -200%) scale(2); opacity: 0; }
+    }
+
+    .scroll-msg {
+      font-size: 16px;
+      color: #ff1493;
+      margin-top: 10px;
+      animation: blink 1s step-start infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* ✅ Love Shower */
+    .love-shower {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .heart {
       position: absolute;
       color: #ff69b4;
-      font-size: 24px;
-      user-select: none;
-      animation-name: fall, sway;
-      animation-timing-function: linear, ease-in-out;
-      animation-iteration-count: infinite;
-      animation-duration: 7s, 3s;
       opacity: 0.8;
-      filter: drop-shadow(0 0 3px #ff1493);
+      font-size: 14px;
+      animation: fall infinite linear;
+      user-select: none;
       will-change: transform;
+      filter: drop-shadow(0 0 2px #ff1493);
     }
 
     @keyframes fall {
-      0% { transform: translateY(-50px); opacity: 1; }
-      100% { transform: translateY(110vh); opacity: 0; }
+      0% {
+        transform: translateY(-10vh) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) scale(1.2);
+        opacity: 0;
+      }
     }
 
-    @keyframes sway {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(20px); }
-    }
-
-    /* Responsive for mobile */
+    /* ✅ Responsive */
     @media (max-width: 600px) {
-      body, html {
-        overflow-x: hidden;
-      }
-
-      .container {
-        padding: 20px 10px;
-        max-width: 100vw;
-      }
-
-      .click-box {
-        font-size: 18px;
-        padding: 14px 28px;
-        margin-top: 50px;
-      }
-
-      .cake {
-        font-size: 28px;
-        margin: 20px 0 10px;
-      }
-
-      .name {
-        font-size: 22px;
-        margin-bottom: 15px;
-      }
-
+      .cake { font-size: 36px; }
+      .name { font-size: 24px; }
+      .click-box { font-size: 20px; padding: 16px 32px; }
       .message {
-        font-size: 18px;
-        padding: 20px 15px;
-        max-width: 95vw;
-        box-sizing: border-box;
+        font-size: 20px;
+        padding: 20px;
+        max-width: 95%;
       }
-
       .heart-box {
-        font-size: 60px;
+        font-size: 80px;
       }
-
       .slideshow-section img {
         width: 95vw;
         max-width: 100%;
       }
-
-      .music-disc {
-        width: 60px;
-        height: 60px;
-        bottom: 10px;
-        right: 10px;
-        border: 2px solid #ff69b4;
-        box-shadow: 0 0 10px rgba(255, 192, 203, 0.7);
-      }
-
-      .scroll-msg {
-        font-size: 14px;
-      }
     }
   </style>
 </head>
+
 <body>
   <div class="stars"></div>
   <div class="hearts"></div>
@@ -253,7 +244,11 @@
 
     <div class="message-section" id="wish">
       <div class="message">
-        Happy 19th Birthday my love! ❤️ You make my world brighter every day. Your smile, your kindness, and your heart mean everything to me. I'm so lucky to have you in my life. May this year bring you endless happiness, laughter, and love. I love you more than words can say, Tuuaa Raniii! 😘💕
+        Happy 19th Birthday my love! ❤️ You make my world brighter every day.
+        Your smile, your kindness, and your heart mean everything to me.
+        I'm so lucky to have you in my life. May this year bring you endless
+        happiness, laughter, and love. I love you more than words can say,
+        Tuuaa Raniii! 😘💕
       </div>
     </div>
 
@@ -274,7 +269,8 @@
     </div>
   </div>
 
-  <div class="love-shower" id="loveShower" style="display:none;"></div>
+  <!-- ❤️ Love Shower Container -->
+  <div class="love-shower" id="loveShower"></div>
 
   <audio id="romanticAudio">
     <source src="romantic.mp3" type="audio/mpeg" />
@@ -333,32 +329,39 @@
       showNext();
     }
 
+    // ❤️ Love Shower Function
     function startLoveShower() {
       const container = document.getElementById('loveShower');
       container.style.display = 'block';
 
-      // Clear any previous hearts
-      container.innerHTML = '';
+      const numberOfHearts = 80;
 
-      // Create multiple hearts with random properties
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < numberOfHearts; i++) {
         const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.textContent = '❤️';
+        heart.className = 'heart';
+        heart.innerText = '❤️';
 
-        // Random horizontal start position
-        heart.style.left = Math.random() * window.innerWidth + 'px';
+        const size = Math.random() * 12 + 8; // 8px to 20px
+        heart.style.fontSize = `${size}px`;
 
-        // Random animation delay so hearts start at different times
-        heart.style.animationDelay = `${Math.random() * 7}s, ${Math.random() * 3}s`;
+        heart.style.left = `${Math.random() * 100}vw`;
 
-        // Random size variation
-        const size = 12 + Math.random() * 24;
-        heart.style.fontSize = size + 'px';
+        const duration = Math.random() * 3 + 4; // 4s to 7s
+        const delay = Math.random() * 5; // random delay
+
+        heart.style.animationDuration = `${duration}s`;
+        heart.style.animationDelay = `${delay}s`;
 
         container.appendChild(heart);
+
+        // Reset when animation loops
+        heart.addEventListener('animationiteration', () => {
+          heart.style.left = `${Math.random() * 100}vw`;
+          heart.style.animationDuration = `${Math.random() * 3 + 4}s`;
+        });
       }
     }
   </script>
 </body>
 </html>
+
