@@ -179,15 +179,66 @@
       }
     }
 
-    /* ✅ Responsive Fixes */
+    /* ✅ Improved Mobile Responsiveness */
     @media (max-width: 600px) {
-      .cake { font-size: 36px; }
-      .name { font-size: 24px; }
-      .click-box { font-size: 20px; padding: 16px 32px; }
-      .message { font-size: 20px; padding: 20px; }
-      .heart-box { font-size: 80px; }
-      .slideshow-section img { width: 95vw; max-width: 100%; }
-      .music-disc { width: 60px; height: 60px; }
+      .cake {
+        font-size: 30px;
+        text-align: center;
+      }
+
+      .name {
+        font-size: 22px;
+        margin-bottom: 15px;
+      }
+
+      .click-box {
+        font-size: 18px;
+        padding: 14px 24px;
+        width: 100%;
+        max-width: 320px;
+        margin: 80px auto 0;
+      }
+
+      .message {
+        font-size: 18px;
+        padding: 16px;
+        line-height: 1.5;
+        box-shadow: none;
+        width: 95%;
+      }
+
+      .heart-box {
+        font-size: 70px;
+      }
+
+      .scroll-msg {
+        font-size: 14px;
+      }
+
+      .slideshow-section img {
+        width: 95vw;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .music-disc {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+        right: 15px;
+      }
+
+      .firework {
+        box-shadow: 0 0 10px #fff5fa, 0 0 15px #ff69b4;
+      }
+
+      .container {
+        padding: 20px 10px;
+      }
+
+      .love-shower .heart {
+        font-size: 12px !important;
+      }
     }
   </style>
 </head>
@@ -306,4 +357,5 @@
     }
   </script>
 </body>
-</html>    
+</html>
+
