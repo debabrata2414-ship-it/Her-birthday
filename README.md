@@ -2,19 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Happy Birthday Tuuaa Raniii ❤️❤️😘</title>
 
-  <!-- Google Font -->
+  <!-- ✅ Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      max-width: 100%;
+      overflow-x: hidden;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to bottom right, #ffd6e8, #fff0f5);
-      overflow-x: hidden;
-      position: relative;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     .container {
@@ -35,13 +40,14 @@
       cursor: pointer;
       transition: all 0.3s ease;
       margin-top: 100px;
+      max-width: 90%;
     }
 
     .click-box:hover {
       background-color: #ff1493;
     }
 
-    .cake-section, .message-section, .gift-section, .slideshow-section {
+    .cake-section, .message-section, .gift-section, .gallery-section, .slideshow-section {
       display: none;
       flex-direction: column;
       align-items: center;
@@ -68,6 +74,7 @@
       padding: 30px;
       border-radius: 15px;
       box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+      width: 100%;
     }
 
     .heart-box {
@@ -111,13 +118,12 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ✅ Music Disc - Bottom Right */
     .music-disc {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 80px;
-      height: 80px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       background: url('img3.jpg') no-repeat center/cover;
       border: 3px solid #ff69b4;
@@ -131,36 +137,6 @@
       to { transform: rotate(360deg); }
     }
 
-    .stars, .hearts {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .stars {
-      background-image: radial-gradient(#ffffff33 1px, transparent 1px);
-      background-size: 30px 30px;
-    }
-
-    .hearts::before {
-      content: '💖💞💕💓💘';
-      font-size: 30px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation: floatHearts 10s linear infinite;
-    }
-
-    @keyframes floatHearts {
-      0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-      100% { transform: translate(-50%, -200%) scale(2); opacity: 0; }
-    }
-
     .scroll-msg {
       font-size: 16px;
       color: #ff1493;
@@ -172,67 +148,52 @@
       50% { opacity: 0; }
     }
 
-    /* ✅ Love Shower */
+    /* ❤️ Love Shower */
     .love-shower {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      overflow: hidden;
       pointer-events: none;
-      z-index: 1;
+      overflow: hidden;
+      z-index: 5;
+      display: none;
     }
 
     .heart {
       position: absolute;
+      top: -20px;
+      animation-name: fall;
+      animation-timing-function: linear;
       color: #ff69b4;
-      opacity: 0.8;
-      font-size: 14px;
-      animation: fall infinite linear;
-      user-select: none;
-      will-change: transform;
-      filter: drop-shadow(0 0 2px #ff1493);
     }
 
     @keyframes fall {
       0% {
-        transform: translateY(-10vh) scale(1);
+        transform: translateY(0);
         opacity: 1;
       }
       100% {
-        transform: translateY(110vh) scale(1.2);
-        opacity: 0;
+        transform: translateY(100vh);
+        opacity: 0.3;
       }
     }
 
-    /* ✅ Responsive */
+    /* ✅ Responsive Fixes */
     @media (max-width: 600px) {
       .cake { font-size: 36px; }
       .name { font-size: 24px; }
       .click-box { font-size: 20px; padding: 16px 32px; }
-      .message {
-        font-size: 20px;
-        padding: 20px;
-        max-width: 95%;
-      }
-      .heart-box {
-        font-size: 80px;
-      }
-      .slideshow-section img {
-        width: 95vw;
-        max-width: 100%;
-      }
+      .message { font-size: 20px; padding: 20px; }
+      .heart-box { font-size: 80px; }
+      .slideshow-section img { width: 95vw; max-width: 100%; }
+      .music-disc { width: 60px; height: 60px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="stars"></div>
-  <div class="hearts"></div>
-
-  <div class="music-disc"></div>
-
   <div class="container">
     <div class="click-box" onclick="startSurprise()">Click Me 💝</div>
 
@@ -244,11 +205,7 @@
 
     <div class="message-section" id="wish">
       <div class="message">
-        Happy 19th Birthday my love! ❤️ You make my world brighter every day.
-        Your smile, your kindness, and your heart mean everything to me.
-        I'm so lucky to have you in my life. May this year bring you endless
-        happiness, laughter, and love. I love you more than words can say,
-        Tuuaa Raniii! 😘💕
+        Happy 19th Birthday my love! ❤️ You make my world brighter every day. Your smile, your kindness, and your heart mean everything to me. I'm so lucky to have you in my life. May this year bring you endless happiness, laughter, and love. I love you more than words can say, Tuuaa Raniii! 😘💕
       </div>
     </div>
 
@@ -269,9 +226,13 @@
     </div>
   </div>
 
+  <!-- 🎵 Music Disc -->
+  <div class="music-disc"></div>
+
   <!-- ❤️ Love Shower Container -->
   <div class="love-shower" id="loveShower"></div>
 
+  <!-- 🎶 Background Music -->
   <audio id="romanticAudio">
     <source src="romantic.mp3" type="audio/mpeg" />
   </audio>
@@ -280,9 +241,7 @@
     function startSurprise() {
       document.querySelector('.click-box').style.display = 'none';
       const audio = document.getElementById('romanticAudio');
-      audio.play().catch(e => {
-        console.log("User interaction needed to play audio.");
-      });
+      audio.play().catch(e => console.log("User interaction needed to play audio."));
       document.getElementById('cake').style.display = 'flex';
       setTimeout(() => {
         document.getElementById('wish').style.display = 'flex';
@@ -300,7 +259,6 @@
       setTimeout(() => {
         document.getElementById('gift').style.display = 'none';
         startSlideshow();
-        startLoveShower();
       }, 2500);
     }
 
@@ -320,6 +278,11 @@
       const images = slideshow.querySelectorAll('img');
       slideshow.style.display = 'flex';
       let i = 0;
+
+      // ❤️ Start love shower
+      document.getElementById('loveShower').style.display = 'block';
+      generateLoveShower();
+
       function showNext() {
         images.forEach(img => img.style.display = 'none');
         images[i].style.display = 'block';
@@ -329,39 +292,21 @@
       showNext();
     }
 
-    // ❤️ Love Shower Function
-    function startLoveShower() {
-      const container = document.getElementById('loveShower');
-      container.style.display = 'block';
-
-      const numberOfHearts = 80;
-
-      for (let i = 0; i < numberOfHearts; i++) {
+    // ❤️ Love Shower Generator
+    function generateLoveShower() {
+      setInterval(() => {
         const heart = document.createElement('div');
         heart.className = 'heart';
-        heart.innerText = '❤️';
-
-        const size = Math.random() * 12 + 8; // 8px to 20px
-        heart.style.fontSize = `${size}px`;
-
-        heart.style.left = `${Math.random() * 100}vw`;
-
-        const duration = Math.random() * 3 + 4; // 4s to 7s
-        const delay = Math.random() * 5; // random delay
-
-        heart.style.animationDuration = `${duration}s`;
-        heart.style.animationDelay = `${delay}s`;
-
-        container.appendChild(heart);
-
-        // Reset when animation loops
-        heart.addEventListener('animationiteration', () => {
-          heart.style.left = `${Math.random() * 100}vw`;
-          heart.style.animationDuration = `${Math.random() * 3 + 4}s`;
-        });
-      }
+        heart.textContent = '💖';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = (10 + Math.random() * 20) + 'px';
+        heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+        document.getElementById('loveShower').appendChild(heart);
+        setTimeout(() => heart.remove(), 7000);
+      }, 100);
     }
   </script>
 </body>
 </html>
+
 
