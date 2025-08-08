@@ -89,11 +89,22 @@
       border-radius: 50%;
       animation: explode 1.2s ease-out forwards;
       box-shadow: 0 0 20px #fff5fa, 0 0 30px #ff69b4;
+      pointer-events: none;
+      z-index: 1000;
     }
 
     @keyframes explode {
       0% { transform: scale(1); opacity: 1; }
       100% { transform: scale(25); opacity: 0; }
+    }
+
+    .slideshow-section {
+      position: relative;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
     }
 
     .slideshow-section img {
@@ -103,6 +114,8 @@
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
       display: none;
       animation: fadeIn 1s ease forwards;
+      z-index: 6;
+      position: relative;
     }
 
     @keyframes fadeIn {
@@ -110,10 +123,11 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Moved music disc to bottom right */
     .music-disc {
       position: fixed;
-      top: 20px;
-      left: 20px;
+      bottom: 20px;
+      right: 20px;
       width: 80px;
       height: 80px;
       border-radius: 50%;
@@ -124,81 +138,50 @@
       z-index: 10;
     }
 
-    /* ✅ Updated Zoom Out Label */
-    .zoom-label {
-      position: fixed;
-      top: 110px; /* Below the disc (80px + 20px margin) */
-      left: 20px;
-      font-family: 'Dancing Script', cursive;
-      font-size: 36px;
-      color: #ff1493;
-      font-weight: bold;
-      text-shadow: 1px 1px 4px #fff;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
-    }
-
-    /* Stylish heavy right arrow */
-    .arrow {
-      font-size: 42px;
-      color: #ff1493;
-      margin-left: 10px;
-      filter: drop-shadow(0 0 2px #fff);
-      user-select: none;
-    }
-
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
 
-    .stars, .hearts {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    /* Hearts shower container, hidden by default */
+    .love-shower {
       pointer-events: none;
-      z-index: -1;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: visible;
+      z-index: 2;
     }
 
-    .stars {
-      background-image: radial-gradient(#ffffff33 1px, transparent 1px);
-      background-size: 30px 30px;
-    }
-
-    .hearts::before {
-      content: '💖💞💕💓💘';
-      font-size: 30px;
+    .love-shower .heart {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation: floatHearts 10s linear infinite;
+      color: #ff69b4;
+      font-size: 24px;
+      user-select: none;
+      animation-name: fall, sway;
+      animation-timing-function: linear, ease-in-out;
+      animation-iteration-count: infinite;
+      animation-duration: 7s, 3s;
+      opacity: 0.8;
+      filter: drop-shadow(0 0 3px #ff1493);
+      will-change: transform;
     }
 
-    @keyframes floatHearts {
-      0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-      100% { transform: translate(-50%, -200%) scale(2); opacity: 0; }
+    @keyframes fall {
+      0% { transform: translateY(-50px); opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0; }
     }
 
-    .scroll-msg {
-      font-size: 16px;
-      color: #ff1493;
-      margin-top: 10px;
-      animation: blink 1s step-start infinite;
+    @keyframes sway {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(20px); }
     }
 
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-
-    /* ✅ Responsive Design */
+    /* Responsive for mobile */
     @media (max-width: 600px) {
       body, html {
-        overflow-x: hidden; /* prevent horizontal scroll */
+        overflow-x: hidden;
       }
 
       .container {
@@ -238,28 +221,13 @@
         max-width: 100%;
       }
 
-      /* Music Disc smaller and repositioned */
       .music-disc {
         width: 60px;
         height: 60px;
-        top: 10px;
-        left: 10px;
+        bottom: 10px;
+        right: 10px;
         border: 2px solid #ff69b4;
         box-shadow: 0 0 10px rgba(255, 192, 203, 0.7);
-      }
-
-      /* Zoom Label smaller and repositioned */
-      .zoom-label {
-        font-size: 24px;
-        top: 80px;
-        left: 10px;
-        white-space: nowrap;
-      }
-
-      /* Arrow smaller */
-      .arrow {
-        font-size: 28px;
-        margin-left: 6px;
       }
 
       .scroll-msg {
@@ -273,11 +241,6 @@
   <div class="hearts"></div>
 
   <div class="music-disc"></div>
-
-  <div class="zoom-label">
-    Zoom Out
-    <span class="arrow">➔</span>
-  </div>
 
   <div class="container">
     <div class="click-box" onclick="startSurprise()">Click Me 💝</div>
@@ -311,6 +274,8 @@
     </div>
   </div>
 
+  <div class="love-shower" id="loveShower" style="display:none;"></div>
+
   <audio id="romanticAudio">
     <source src="romantic.mp3" type="audio/mpeg" />
   </audio>
@@ -339,6 +304,7 @@
       setTimeout(() => {
         document.getElementById('gift').style.display = 'none';
         startSlideshow();
+        startLoveShower();
       }, 2500);
     }
 
@@ -365,6 +331,33 @@
         setTimeout(showNext, 2500);
       }
       showNext();
+    }
+
+    function startLoveShower() {
+      const container = document.getElementById('loveShower');
+      container.style.display = 'block';
+
+      // Clear any previous hearts
+      container.innerHTML = '';
+
+      // Create multiple hearts with random properties
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.textContent = '❤️';
+
+        // Random horizontal start position
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+
+        // Random animation delay so hearts start at different times
+        heart.style.animationDelay = `${Math.random() * 7}s, ${Math.random() * 3}s`;
+
+        // Random size variation
+        const size = 12 + Math.random() * 24;
+        heart.style.fontSize = size + 'px';
+
+        container.appendChild(heart);
+      }
     }
   </script>
 </body>
