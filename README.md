@@ -2,50 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Happy Birthday Tuuaa Raniii ❤️❤️😘</title>
 
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
 
   <style>
+    /* Reset & base */
     html, body {
-      margin: 0;
-      padding: 0;
-      max-width: 100%;
-      overflow-x: hidden;
-      font-family: 'Segoe UI', sans-serif;
+      margin: 0; padding: 0;
+      width: 100vw;
+      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to bottom right, #ffd6e8, #fff0f5);
-      height: 100%;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
     }
 
-    * {
+    body {
+      flex-direction: column;
+      padding: 15px;
       box-sizing: border-box;
     }
 
     .container {
+      width: 100%;
+      max-width: 400px; /* Mobile friendly width */
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       text-align: center;
-      padding: 30px;
-      min-height: 100vh;
     }
 
     .click-box {
       background-color: #ff69b4;
       color: white;
-      padding: 20px 40px;
-      font-size: 24px;
-      border-radius: 10px;
+      font-size: 22px;
+      padding: 18px 0;
+      border-radius: 12px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 100px;
-      max-width: 90%;
-      user-select: none;
+      width: 100%;
+      max-width: 320px;
+      margin: 100px auto 0;
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+      transition: background-color 0.3s ease;
     }
-
     .click-box:hover {
       background-color: #ff1493;
     }
@@ -54,52 +59,57 @@
       display: none;
       flex-direction: column;
       align-items: center;
-      animation: fadeIn 2s ease forwards;
+      animation: fadeIn 1.5s ease forwards;
+      margin-top: 30px;
       width: 100%;
-      max-width: 800px;
-      margin: 20px auto;
     }
 
     .cake {
-      font-size: 50px;
-      margin: 40px 0 10px;
+      font-size: 36px;
+      margin: 20px 0 10px;
+      user-select: none;
     }
 
     .name {
-      font-size: 30px;
-      font-weight: bold;
-      color: #ff1493;
-      margin-bottom: 20px;
       font-family: 'Dancing Script', cursive;
+      font-size: 26px;
+      font-weight: 700;
+      color: #ff1493;
+      margin-bottom: 15px;
+      user-select: none;
+    }
+
+    .scroll-msg {
+      font-size: 14px;
+      color: #ff1493;
+      animation: blink 1.2s step-start infinite;
+      margin-top: -10px;
+      user-select: none;
     }
 
     .message {
-      font-size: 26px;
-      line-height: 1.6;
+      font-size: 20px;
+      line-height: 1.5;
       background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(255, 105, 180, 0.3);
       width: 100%;
       user-select: none;
+      word-break: break-word;
     }
 
     .heart-box {
-      font-size: 100px;
+      font-size: 80px;
+      color: #ff0000;
       cursor: pointer;
       animation: pulse 1.5s infinite;
+      margin-bottom: 12px;
+      text-shadow: 0 0 15px #ff0000, 0 0 25px #ff4d4d;
       user-select: none;
-      color: #ff0000;
-      text-shadow: 0 0 15px #ff0000, 0 0 30px #ff4d4d;
-      margin-bottom: 10px;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-
+    /* Fireworks */
     .firework {
       position: fixed;
       width: 10px;
@@ -110,16 +120,21 @@
       box-shadow: 0 0 20px #fff5fa, 0 0 30px #ff69b4;
       pointer-events: none;
       user-select: none;
+      z-index: 9999;
     }
 
-    @keyframes explode {
-      0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(25); opacity: 0; }
+    /* Slideshow */
+    .slideshow-section {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+      width: 100%;
+      max-width: 320px;
     }
 
     .slideshow-section img {
-      width: 90vw;
-      max-width: 600px;
+      width: 100%;
       border-radius: 15px;
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
       display: none;
@@ -127,44 +142,23 @@
       user-select: none;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
+    /* Music Disc */
     .music-disc {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 70px;
-      height: 70px;
+      bottom: 15px;
+      right: 15px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       background: url('img3.jpg') no-repeat center/cover;
       border: 3px solid #ff69b4;
       animation: spin 5s linear infinite;
-      box-shadow: 0 0 20px rgba(255, 192, 203, 0.7);
-      z-index: 10;
+      box-shadow: 0 0 15px rgba(255, 192, 203, 0.7);
+      z-index: 1000;
       user-select: none;
     }
 
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .scroll-msg {
-      font-size: 16px;
-      color: #ff1493;
-      margin-top: 10px;
-      animation: blink 1s step-start infinite;
-      user-select: none;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-
-    /* ❤️ Love Shower */
+    /* Love shower hearts container */
     .love-shower {
       position: fixed;
       top: 0;
@@ -173,7 +167,7 @@
       height: 100vh;
       pointer-events: none;
       overflow: hidden;
-      z-index: 5;
+      z-index: 900;
       display: none;
       user-select: none;
     }
@@ -181,39 +175,41 @@
     .heart {
       position: absolute;
       top: -20px;
-      color: red;
+      color: #ff0000;
       text-shadow: 0 0 10px #ff0000, 0 0 20px #ff4d4d, 0 0 30px #ff6666;
       animation-name: fall;
       animation-timing-function: linear;
       user-select: none;
     }
 
-    @keyframes fall {
-      0% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh);
-        opacity: 0.2;
-      }
+    /* Animations */
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
     }
 
-    /* Responsive Fixes */
-    @media (max-width: 600px) {
-      .container {
-        padding: 20px;
-        align-items: center;
-        justify-content: center;
-      }
+    @keyframes blink {
+      50% {opacity: 0;}
+    }
 
-      .cake { font-size: 36px; }
-      .name { font-size: 24px; }
-      .click-box { font-size: 20px; padding: 16px 32px; }
-      .message { font-size: 20px; padding: 20px; }
-      .heart-box { font-size: 80px; }
-      .slideshow-section img { width: 95vw; max-width: 100%; }
-      .music-disc { width: 60px; height: 60px; }
+    @keyframes pulse {
+      0%, 100% {transform: scale(1);}
+      50% {transform: scale(1.1);}
+    }
+
+    @keyframes explode {
+      0% {transform: scale(1); opacity: 1;}
+      100% {transform: scale(25); opacity: 0;}
+    }
+
+    @keyframes fall {
+      0% {transform: translateY(0); opacity: 1;}
+      100% {transform: translateY(100vh); opacity: 0.2;}
+    }
+
+    @keyframes spin {
+      from {transform: rotate(0deg);}
+      to {transform: rotate(360deg);}
     }
   </style>
 </head>
@@ -251,36 +247,44 @@
     </div>
   </div>
 
-  <!-- Music Disc -->
   <div class="music-disc" aria-label="Rotating music disc"></div>
 
-  <!-- Love Shower Container -->
   <div class="love-shower" id="loveShower" aria-hidden="true"></div>
 
-  <!-- Background Music -->
   <audio id="romanticAudio" preload="auto">
     <source src="romantic.mp3" type="audio/mpeg" />
   </audio>
 
   <script>
     function startSurprise() {
-      document.querySelector('.click-box').style.display = 'none';
+      const clickBox = document.querySelector('.click-box');
+      clickBox.style.display = 'none';
+
       const audio = document.getElementById('romanticAudio');
-      audio.play().catch(() => console.log("User interaction needed to play audio."));
+      audio.play().catch(() => {
+        console.log('User interaction required to play audio.');
+      });
+
       document.getElementById('cake').style.display = 'flex';
+
       setTimeout(() => {
         document.getElementById('wish').style.display = 'flex';
-      }, 2000);
+      }, 1800);
+
       setTimeout(() => {
         document.getElementById('gift').style.display = 'flex';
-      }, 4000);
+      }, 3600);
     }
 
     function openGift() {
-      document.querySelector('.heart-box').style.display = 'none';
+      const heartBox = document.querySelector('.heart-box');
+      heartBox.style.display = 'none';
+
       const giftMessage = document.querySelector('#gift .message');
       giftMessage.textContent = "Here's your surprise! 🎉 Enjoy the music and photos!";
+
       explodeFireworks();
+
       setTimeout(() => {
         document.getElementById('gift').style.display = 'none';
         startSlideshow();
@@ -302,18 +306,16 @@
       const slideshow = document.getElementById('slideshow');
       const images = slideshow.querySelectorAll('img');
       slideshow.style.display = 'flex';
-      let i = 0;
 
-      // Show the first image immediately
-      images.forEach(img => img.style.display = 'none');
+      let i = 0;
+      images.forEach(img => (img.style.display = 'none'));
       images[0].style.display = 'block';
 
-      // Start love shower hearts
       document.getElementById('loveShower').style.display = 'block';
       generateLoveShower();
 
       function showNext() {
-        images.forEach(img => img.style.display = 'none');
+        images.forEach(img => (img.style.display = 'none'));
         images[i].style.display = 'block';
         i = (i + 1) % images.length;
         setTimeout(showNext, 2500);
@@ -321,13 +323,13 @@
       setTimeout(showNext, 2500);
     }
 
-    // Love Shower Generator with red glowing hearts, centered horizontally
+    // Love Shower with red glowing hearts, centered horizontally
     function generateLoveShower() {
       setInterval(() => {
         const heart = document.createElement('div');
         heart.className = 'heart';
         heart.textContent = '❤️';
-        // Centered horizontally between 25vw to 75vw (middle half)
+        // Center horizontally on screen between 25vw and 75vw
         heart.style.left = (25 + Math.random() * 50) + 'vw';
         heart.style.fontSize = (15 + Math.random() * 25) + 'px';
         heart.style.animationDuration = (3 + Math.random() * 3) + 's';
@@ -339,4 +341,5 @@
   </script>
 </body>
 </html>
+
 
